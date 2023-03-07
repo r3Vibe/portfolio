@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
 
 interface authInterface{
     isLoggedIn:boolean,
-    userData:object
+    userData:{
+        role:string
+    }
 }
 
 const initialState: authInterface = {
     isLoggedIn:false,
-    userData:{}
+    userData:{
+        role:"admin"
+    }
 }
 
 export const authSlice = createSlice({
@@ -20,6 +23,7 @@ export const authSlice = createSlice({
         },
         login:(state) => {
             state.isLoggedIn = true
+
         }
     }
 })

@@ -2,6 +2,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import { NavLink } from "react-router-dom";
+import { logout } from '../../store/slices/authSlice';
+import { useTypedDispatch } from '../../hooks/TypedReduxHooks';
 
 interface sidebar {
     title: string
@@ -9,6 +11,7 @@ interface sidebar {
 
 
 const Sidebar = ({ title }: sidebar) => {
+    const dispatch = useTypedDispatch();
     return (
         <>
             <Offcanvas show={true} {...{ backdrop: false }}>
@@ -27,7 +30,7 @@ const Sidebar = ({ title }: sidebar) => {
                             <NavLink to={"/admin/projects"} className={({ isActive }) => isActive ? "active nav-link" : "nav-link" }>Projects</NavLink>
                             <NavLink to={"/admin/contacts"} className={({ isActive }) => isActive ? "active nav-link" : "nav-link" }>Conatcts</NavLink>
                             <NavLink to={"/admin/profile"} className={({ isActive }) => isActive ? "active nav-link" : "nav-link" }>Profile</NavLink>
-                            <NavLink to={"/admin/dashboard"} className={({ isActive }) => isActive ? "active nav-link" : "nav-link" }>Logout</NavLink>
+                            <NavLink to={"#!"} onClick={() => dispatch(logout())} className="nav-link">Logout</NavLink>
                         </Nav>
                     </Container>
                 </Offcanvas.Body>
