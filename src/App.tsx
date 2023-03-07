@@ -1,24 +1,23 @@
-import Layout from "./components/Layout";
-import { useTypedSelector,useTypedDispatch } from "./hooks/TypedReduxHooks"
-import { login,logout } from "./store/slices/authSlice";
+import Layout from "./components/Layout/Layout";
+import AdminLayout from "./components/AdminLayout/AdminLayout";
+import SiteRoutes from "./routes/SiteRoutes";
+
 
 function App() {
-  const loginState = useTypedSelector((state) => state.auth.isLoggedIn);
-  const dispatch = useTypedDispatch();
-  const handleClick = () => {
-    if(loginState){
-      dispatch(logout());
-    }else{
-      dispatch(login());
-    }
+  const userRole:string = "admin";
+  if(userRole === "user") {
+    return (
+      <AdminLayout>
+        <SiteRoutes />
+      </AdminLayout>
+    ) 
+  }else{
+    return (
+      <Layout>
+        <SiteRoutes />
+      </Layout>
+    ) 
   }
-  return (
-    <Layout>
-      <center>
-        <h3>layout</h3>
-      </center>
-    </Layout>
-  )
 }
 
 export default App
